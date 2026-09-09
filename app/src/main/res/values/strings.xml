@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">PrivacyView</string>
+    <string name="app_tagline">Your screen. Your privacy.</string>
+    <string name="privacy_on">Privacy is ON</string>
+    <string name="privacy_off">Privacy is OFF</string>
+    <string name="turn_on_privacy">Turn On Privacy</string>
+    <string name="turn_off_privacy">Turn Off Privacy</string>
+    <string name="privacy_effect">Privacy Effect</string>
+    <string name="privacy_strength">Privacy Strength</string>
+    <string name="effect_blur">Blur</string>
+    <string name="effect_dark">Dark</string>
+    <string name="quick_access">Quick Access</string>
+    <string name="home_widget">Home Screen Widget</string>
+    <string name="quick_settings">Quick Settings Tile</string>
+    <string name="advanced">Advanced</string>
+    <string name="hardware_shortcut">Hardware Shortcut</string>
+    <string name="test_privacy">Test Privacy</string>
+    <string name="accessibility_service_description">PrivacyView uses this service solely to detect double-clicks of the volume button to toggle privacy mode. No keystrokes, screen content, or personal data are collected or transmitted.</string>
+    <string name="tile_label">PrivacyView</string>
+    <string name="notification_channel_name">PrivacyView Active</string>
+    <string name="notification_channel_desc">Shows an unobtrusive status notification when privacy overlay is active.</string>
+    <string name="notification_title">PrivacyView Active</string>
+    <string name="notification_text">Tap to configure or turn off privacy mode.</string>
+</resources>

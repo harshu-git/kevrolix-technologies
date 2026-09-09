@@ -1,0 +1,11 @@
+<resources>
+    <color name="background_black">#0D0D0E</color>
+    <color name="surface_dark">#18181A</color>
+    <color name="surface_card">#222226</color>
+    <color name="border_subtle">#2E2E34</color>
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#8E8E93</color>
+    <color name="accent_active">#00E599</color>
+    <color name="accent_pill">#FFFFFF</color>
+    <color name="pill_text_dark">#0D0D0E</color>
+</resources>
