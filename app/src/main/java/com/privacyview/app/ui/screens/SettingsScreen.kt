@@ -332,6 +332,14 @@ fun SettingsScreen(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
+                    Text(text = "Developer", style = Typography.bodyMedium, color = TextSecondary)
+                    Text(text = "Kevrolix Technologies", style = Typography.titleMedium, color = TextPrimary)
+                }
+                Spacer(modifier = Modifier.height(12.dp))
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
                     Text(text = "Version", style = Typography.bodyMedium, color = TextSecondary)
                     Text(text = "1.0.0 (Production Architecture)", style = Typography.titleMedium, color = TextPrimary)
                 }

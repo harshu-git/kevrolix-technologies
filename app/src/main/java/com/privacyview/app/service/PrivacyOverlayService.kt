@@ -201,10 +201,10 @@ class PrivacyOverlayService : Service() {
             if (mode == PrivacyMode.BLUR && isCrossWindowBlurAvailable) {
                 params.flags = params.flags or WindowManager.LayoutParams.FLAG_BLUR_BEHIND
                 val blurRadius = (strength * 45f).roundToInt().coerceIn(5, 80)
-                params.setBlurRadius(blurRadius)
+                params.setBlurBehindRadius(blurRadius)
             } else {
                 params.flags = params.flags and WindowManager.LayoutParams.FLAG_BLUR_BEHIND.inv()
-                params.setBlurRadius(0)
+                params.setBlurBehindRadius(0)
             }
         }
     }
