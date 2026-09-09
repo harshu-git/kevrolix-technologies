@@ -364,9 +364,13 @@ private fun StepModeSelection(
 
         Spacer(modifier = Modifier.height(28.dp))
 
+        val context = androidx.compose.ui.platform.LocalContext.current
+        val isBlurSupported = androidx.compose.runtime.remember { com.privacyview.app.data.PrivacyMode.isBlurSupported(context) }
+
         ModeSelector(
             selectedMode = currentMode,
-            onModeSelected = onModeChanged
+            onModeSelected = onModeChanged,
+            isBlurAvailable = isBlurSupported
         )
 
         Spacer(modifier = Modifier.height(20.dp))

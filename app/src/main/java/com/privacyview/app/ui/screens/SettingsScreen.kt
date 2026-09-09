@@ -23,9 +23,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.ChevronRight
-import androidx.compose.material.icons.outlined.PowerSettingsNew
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Security
-import androidx.compose.material.icons.outlined.Tune
 import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -37,7 +36,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -104,9 +102,51 @@ fun SettingsScreen(
 
             Spacer(modifier = Modifier.height(28.dp))
 
-            // Hardware Shortcut Section
+            // Android Security & Tapjacking Handling
             Text(
-                text = "Hardware Shortcuts",
+                text = "Android Security & Overlays",
+                style = Typography.titleMedium,
+                color = TextSecondary,
+                modifier = Modifier.padding(start = 4.dp, bottom = 12.dp)
+            )
+
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(20.dp))
+                    .background(SurfaceCard)
+                    .border(1.dp, BorderSubtle, RoundedCornerShape(20.dp))
+                    .padding(18.dp)
+            ) {
+                Row(verticalAlignment = Alignment.Top) {
+                    Icon(
+                        imageVector = Icons.Outlined.Security,
+                        contentDescription = null,
+                        tint = Color(0xFF30D158),
+                        modifier = Modifier.size(22.dp)
+                    )
+                    Spacer(modifier = Modifier.width(14.dp))
+                    Column {
+                        Text(
+                            text = "Tapjacking Protection Handling",
+                            style = Typography.titleMedium,
+                            color = TextPrimary
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            text = "Android blocks taps on sensitive permission dialogs and secure banking PIN screens while any overlay is active. If Android displays 'App obscuring a permission request', simply tap 'Turn Off' on the PrivacyView notification or Quick Settings tile, confirm the prompt, and tap once to re-enable.",
+                            style = Typography.bodyMedium,
+                            color = TextSecondary
+                        )
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            // Optional Hardware Shortcut Section
+            Text(
+                text = "Optional Hardware Shortcut",
                 style = Typography.titleMedium,
                 color = TextSecondary,
                 modifier = Modifier.padding(start = 4.dp, bottom = 12.dp)
@@ -134,7 +174,7 @@ fun SettingsScreen(
                             )
                             Spacer(modifier = Modifier.height(2.dp))
                             Text(
-                                text = "Instantly toggle privacy mode with physical key",
+                                text = "Secondary physical key toggle (Disabled by default)",
                                 style = Typography.bodyMedium,
                                 color = TextSecondary
                             )
@@ -143,7 +183,6 @@ fun SettingsScreen(
                             checked = isHardwareShortcutEnabled,
                             onCheckedChange = { checked ->
                                 if (checked) {
-                                    // Direct user to Android Accessibility settings
                                     try {
                                         context.startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
                                     } catch (_: Exception) {}
@@ -162,16 +201,16 @@ fun SettingsScreen(
                     Spacer(modifier = Modifier.height(10.dp))
 
                     Text(
-                        text = "Hardware shortcuts require the PrivacyView accessibility service. Off by default. Some device manufacturers may limit volume key intercepts when the screen is locked.",
+                        text = "Hardware shortcuts require the optional PrivacyView accessibility service. Core app operation does not require accessibility. OEM battery managers (Samsung One UI, Xiaomi HyperOS) may limit volume intercepts when media is playing.",
                         style = Typography.labelSmall,
                         color = Color(0xFF6E6E73)
                     )
                 }
             }
 
-            Spacer(modifier = Modifier.height(28.dp))
+            Spacer(modifier = Modifier.height(24.dp))
 
-            // Start Behavior Section
+            // System Behavior Section
             Text(
                 text = "System Behavior",
                 style = Typography.titleMedium,
@@ -218,16 +257,9 @@ fun SettingsScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(28.dp))
+            Spacer(modifier = Modifier.height(24.dp))
 
-            // Calibration & Angle Test
-            Text(
-                text = "Display Calibration",
-                style = Typography.titleMedium,
-                color = TextSecondary,
-                modifier = Modifier.padding(start = 4.dp, bottom = 12.dp)
-            )
-
+            // Calibration Shortcut
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -250,13 +282,13 @@ fun SettingsScreen(
                     Spacer(modifier = Modifier.width(16.dp))
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
-                            text = "Open Calibration Sandbox",
+                            text = "Privacy Calibration Sandbox",
                             style = Typography.titleMedium,
                             color = TextPrimary
                         )
                         Spacer(modifier = Modifier.height(2.dp))
                         Text(
-                            text = "Test viewing angles and contrast balance",
+                            text = "Calibrate side-angle contrast with test cards",
                             style = Typography.bodyMedium,
                             color = TextSecondary
                         )
@@ -272,9 +304,9 @@ fun SettingsScreen(
 
             Spacer(modifier = Modifier.height(28.dp))
 
-            // Privacy Philosophy & About
+            // Standalone Product About
             Text(
-                text = "About",
+                text = "About PrivacyView",
                 style = Typography.titleMedium,
                 color = TextSecondary,
                 modifier = Modifier.padding(start = 4.dp, bottom = 12.dp)
@@ -293,7 +325,7 @@ fun SettingsScreen(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(text = "Application", style = Typography.bodyMedium, color = TextSecondary)
-                    Text(text = "PrivacyView Premium", style = Typography.titleMedium, color = TextPrimary)
+                    Text(text = "PrivacyView", style = Typography.titleMedium, color = TextPrimary)
                 }
                 Spacer(modifier = Modifier.height(12.dp))
                 Row(
@@ -301,7 +333,7 @@ fun SettingsScreen(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(text = "Version", style = Typography.bodyMedium, color = TextSecondary)
-                    Text(text = "1.0.0 (Build 1)", style = Typography.titleMedium, color = TextPrimary)
+                    Text(text = "1.0.0 (Production Architecture)", style = Typography.titleMedium, color = TextPrimary)
                 }
                 Spacer(modifier = Modifier.height(12.dp))
                 Row(
@@ -309,7 +341,7 @@ fun SettingsScreen(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(text = "Advertisements", style = Typography.bodyMedium, color = TextSecondary)
-                    Text(text = "None (Paid Premium)", style = Typography.titleMedium, color = ActiveGreen)
+                    Text(text = "Zero (Paid Premium Utility)", style = Typography.titleMedium, color = ActiveGreen)
                 }
                 Spacer(modifier = Modifier.height(12.dp))
                 Row(
@@ -324,7 +356,7 @@ fun SettingsScreen(
             Spacer(modifier = Modifier.height(20.dp))
 
             Text(
-                text = "PrivacyView is an independent utility designed to provide simple, reliable, and private screen viewing without tracking, ads, or complexity.",
+                text = "PrivacyView is an independent utility. Works without cameras, microphones, tracking, or network transmission.",
                 style = Typography.labelSmall,
                 color = Color(0xFF6E6E73),
                 modifier = Modifier.padding(horizontal = 4.dp)

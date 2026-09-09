@@ -35,7 +35,8 @@ import com.privacyview.app.ui.theme.TextSecondary
 fun ModeSelector(
     selectedMode: PrivacyMode,
     onModeSelected: (PrivacyMode) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    isBlurAvailable: Boolean = true
 ) {
     val modes = PrivacyMode.entries
     val selectedIndex = modes.indexOf(selectedMode)
@@ -65,9 +66,7 @@ fun ModeSelector(
                 .fillMaxHeight()
                 .fillMaxWidth(0.5f)
                 .align(
-                    Alignment.Center.let {
-                        if (animatedBias < 0) Alignment.CenterStart else Alignment.CenterEnd
-                    }
+                    if (animatedBias < 0) Alignment.CenterStart else Alignment.CenterEnd
                 )
                 .clip(RoundedCornerShape(12.dp))
                 .background(Color(0xFF2C2C30))
@@ -79,6 +78,7 @@ fun ModeSelector(
         ) {
             modes.forEach { mode ->
                 val isSelected = mode == selectedMode
+                val isSupported = mode == PrivacyMode.DARK || isBlurAvailable
                 Box(
                     modifier = Modifier
                         .weight(1f)
@@ -93,10 +93,14 @@ fun ModeSelector(
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
-                        text = mode.displayName,
+                        text = if (mode == PrivacyMode.BLUR && !isSupported) "Blur (N/A)" else mode.displayName,
                         fontSize = 15.sp,
                         fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Medium,
-                        color = if (isSelected) TextPrimary else TextSecondary
+                        color = when {
+                            isSelected -> TextPrimary
+                            !isSupported -> Color(0xFF5A5A60)
+                            else -> TextSecondary
+                        }
                     )
                 }
             }

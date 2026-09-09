@@ -22,7 +22,9 @@ import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.CreditCard
 import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.Lock
+import androidx.compose.material.icons.outlined.MedicalInformation
 import androidx.compose.material.icons.outlined.Message
+import androidx.compose.material.icons.outlined.ScreenRotation
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -33,10 +35,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -60,12 +61,19 @@ fun CalibrationScreen(
     onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
+    val isBlurSupported = remember { PrivacyMode.isBlurSupported(context) }
     val scrollState = rememberScrollState()
+
     var simulatedAngle by remember { mutableFloatStateOf(0f) } // 0 deg to 75 deg
 
-    // Calculate optical occlusion for simulated angle
-    val angleFactor = (abs(simulatedAngle) / 75f).coerceIn(0f, 1f)
-    val combinedOcclusion = (angleFactor * currentStrength * 1.5f).coerceIn(0f, 0.96f)
+    // Real-world physical optics simulation for calibration preview:
+    // Direct front (0°-15°): Front user retains high direct contrast sensitivity.
+    // Oblique angle (45°-75°): Panel luminance naturally drops 50%-70%; software tint
+    // and ambient reflection push contrast below readability.
+    val absAngle = abs(simulatedAngle)
+    val angleFactor = (absAngle / 70f).coerceIn(0f, 1f)
+    val directReadability = if (absAngle < 20f) "100% Readable (Front)" else if (absAngle < 45f) "Partial Glare Drop (45°)" else "Obscured (Side Angle)"
 
     Box(
         modifier = modifier
@@ -106,17 +114,44 @@ fun CalibrationScreen(
                 )
             }
 
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Calibration & Device Angle Guide Card
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(20.dp))
+                    .background(SurfaceCard)
+                    .border(1.dp, BorderSubtle, RoundedCornerShape(20.dp))
+                    .padding(18.dp)
+            ) {
+                Row(verticalAlignment = Alignment.Top) {
+                    Icon(
+                        imageVector = Icons.Outlined.ScreenRotation,
+                        contentDescription = null,
+                        tint = Color(0xFF30D158),
+                        modifier = Modifier.size(22.dp)
+                    )
+                    Spacer(modifier = Modifier.width(14.dp))
+                    Column {
+                        Text(
+                            text = "Real Device Calibration",
+                            style = Typography.titleMedium,
+                            color = TextPrimary
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            text = "Tilt your phone 45° to 60° to the side under ambient light. Adjust the slider until side readability collapses while front text remains clear and comfortable.",
+                            style = Typography.bodyMedium,
+                            color = TextSecondary
+                        )
+                    }
+                }
+            }
+
             Spacer(modifier = Modifier.height(20.dp))
 
-            Text(
-                text = "Tilt your device or use the angle simulator below to check how confidential content looks from the front versus side angles.",
-                style = Typography.bodyMedium,
-                color = TextSecondary
-            )
-
-            Spacer(modifier = Modifier.height(24.dp))
-
-            // Simulated Viewing Angle Control
+            // Simulated Viewing Angle Bench
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -132,14 +167,14 @@ fun CalibrationScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "Simulated Viewing Angle",
+                            text = "Simulated Angle",
                             style = Typography.titleMedium,
                             color = TextPrimary
                         )
                         Text(
-                            text = "${simulatedAngle.toInt()}° (${if (simulatedAngle < 15f) "Front" else "Side Angle"})",
-                            style = Typography.labelLarge,
-                            color = if (simulatedAngle < 15f) Color(0xFF30D158) else Color(0xFFFF9F0A)
+                            text = "${simulatedAngle.toInt()}° • $directReadability",
+                            style = Typography.labelSmall,
+                            color = if (absAngle < 20f) Color(0xFF30D158) else Color(0xFFFF9F0A)
                         )
                     }
 
@@ -154,9 +189,9 @@ fun CalibrationScreen(
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // Interactive Sample Confidential Content Sandbox
+            // Realistic Confidential Sample Content
             Text(
-                text = "Sample Confidential Content",
+                text = "Confidential Sample Content",
                 style = Typography.titleMedium,
                 color = TextSecondary,
                 modifier = Modifier.padding(start = 4.dp, bottom = 12.dp)
@@ -172,7 +207,7 @@ fun CalibrationScreen(
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(20.dp)
+                        .padding(18.dp)
                 ) {
                     // Card 1: Banking Balance
                     Box(
@@ -193,7 +228,7 @@ fun CalibrationScreen(
                                         imageVector = Icons.Outlined.CreditCard,
                                         contentDescription = null,
                                         tint = TextSecondary,
-                                        modifier = Modifier.size(18.dp)
+                                        modifier = Modifier.size(16.dp)
                                     )
                                     Spacer(modifier = Modifier.width(8.dp))
                                     Text(
@@ -216,18 +251,18 @@ fun CalibrationScreen(
                                 fontWeight = FontWeight.Bold,
                                 color = TextPrimary
                             )
-                            Spacer(modifier = Modifier.height(4.dp))
+                            Spacer(modifier = Modifier.height(2.dp))
                             Text(
-                                text = "Acct ending in •••• 9842",
+                                text = "Acct •••• 9842 • Wire pending: -$12,500.00",
                                 style = Typography.labelSmall,
                                 color = TextSecondary
                             )
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(14.dp))
+                    Spacer(modifier = Modifier.height(12.dp))
 
-                    // Card 2: Private Message
+                    // Card 2: Confidential Business Message
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -245,23 +280,23 @@ fun CalibrationScreen(
                                 )
                                 Spacer(modifier = Modifier.width(8.dp))
                                 Text(
-                                    text = "Confidential Client Review",
+                                    text = "Private Acquisition Term Sheet",
                                     style = Typography.labelSmall,
                                     color = TextSecondary
                                 )
                             }
                             Spacer(modifier = Modifier.height(6.dp))
                             Text(
-                                text = "The buyout valuation was approved at $4.2M. Please keep documents strictly private until signing.",
+                                text = "The board agreed to the $4.2M valuation terms. Keep this strictly confidential until press release.",
                                 style = Typography.bodyMedium,
                                 color = TextPrimary
                             )
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(14.dp))
+                    Spacer(modifier = Modifier.height(12.dp))
 
-                    // Card 3: Security Code Note
+                    // Card 3: 2FA Emergency Recovery Token
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -276,7 +311,7 @@ fun CalibrationScreen(
                         ) {
                             Column {
                                 Text(
-                                    text = "2FA Emergency Recovery Token",
+                                    text = "2FA Emergency Token",
                                     style = Typography.labelSmall,
                                     color = TextSecondary
                                 )
@@ -298,31 +333,19 @@ fun CalibrationScreen(
                     }
                 }
 
-                // Optical Filter Simulation Layer
-                if (combinedOcclusion > 0.05f) {
-                    when (currentMode) {
-                        PrivacyMode.BLUR -> {
-                            Box(
-                                modifier = Modifier
-                                    .matchParentSize()
-                                    .blur((combinedOcclusion * 18f).dp)
-                                    .background(Color.Black.copy(alpha = combinedOcclusion * 0.75f))
-                            )
-                        }
-                        PrivacyMode.DARK -> {
-                            Box(
-                                modifier = Modifier
-                                    .matchParentSize()
-                                    .background(Color.Black.copy(alpha = combinedOcclusion * 0.95f))
-                            )
-                        }
-                    }
-                }
+                // Simulated Optical Filter Layer
+                val simOcclusion = (0.25f + angleFactor * 0.70f) * currentStrength
+                val overlayAlpha = simOcclusion.coerceIn(0f, 0.95f)
+                Box(
+                    modifier = Modifier
+                        .matchParentSize()
+                        .background(Color.Black.copy(alpha = overlayAlpha))
+                )
             }
 
             Spacer(modifier = Modifier.height(28.dp))
 
-            // Calibration Adjustment Controls
+            // Calibration Live Controls
             Text(
                 text = "Adjust Calibration",
                 style = Typography.titleMedium,
@@ -332,7 +355,8 @@ fun CalibrationScreen(
 
             ModeSelector(
                 selectedMode = currentMode,
-                onModeSelected = onModeChanged
+                onModeSelected = onModeChanged,
+                isBlurAvailable = isBlurSupported
             )
 
             Spacer(modifier = Modifier.height(16.dp))

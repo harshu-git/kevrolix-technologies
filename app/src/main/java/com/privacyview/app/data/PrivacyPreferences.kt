@@ -8,7 +8,8 @@ import kotlinx.coroutines.flow.asStateFlow
 
 class PrivacyPreferences(context: Context) {
 
-    private val prefs: SharedPreferences = context.applicationContext.getSharedPreferences(
+    private val appContext = context.applicationContext
+    private val prefs: SharedPreferences = appContext.getSharedPreferences(
         PREFS_NAME,
         Context.MODE_PRIVATE
     )
@@ -16,12 +17,13 @@ class PrivacyPreferences(context: Context) {
     private val _isPrivacyEnabled = MutableStateFlow(prefs.getBoolean(KEY_IS_ENABLED, false))
     val isPrivacyEnabled: StateFlow<Boolean> = _isPrivacyEnabled.asStateFlow()
 
-    private val _privacyMode = MutableStateFlow(
-        PrivacyMode.fromName(prefs.getString(KEY_MODE, PrivacyMode.BLUR.name))
+    private val initialMode = resolveSafeMode(
+        PrivacyMode.fromName(prefs.getString(KEY_MODE, PrivacyMode.DARK.name))
     )
+    private val _privacyMode = MutableStateFlow(initialMode)
     val privacyMode: StateFlow<PrivacyMode> = _privacyMode.asStateFlow()
 
-    private val _strength = MutableStateFlow(prefs.getFloat(KEY_STRENGTH, 0.65f))
+    private val _strength = MutableStateFlow(prefs.getFloat(KEY_STRENGTH, 0.60f))
     val strength: StateFlow<Float> = _strength.asStateFlow()
 
     private val _isHardwareShortcutEnabled = MutableStateFlow(
@@ -37,6 +39,18 @@ class PrivacyPreferences(context: Context) {
     )
     val hasCompletedOnboarding: StateFlow<Boolean> = _hasCompletedOnboarding.asStateFlow()
 
+    /**
+     * Resolves the requested mode against hardware capabilities.
+     * If BLUR is chosen on an unsupported device, gracefully falls back to DARK.
+     */
+    private fun resolveSafeMode(mode: PrivacyMode): PrivacyMode {
+        return if (mode == PrivacyMode.BLUR && !PrivacyMode.isBlurSupported(appContext)) {
+            PrivacyMode.DARK
+        } else {
+            mode
+        }
+    }
+
     fun setPrivacyEnabled(enabled: Boolean) {
         prefs.edit().putBoolean(KEY_IS_ENABLED, enabled).apply()
         _isPrivacyEnabled.value = enabled
@@ -47,22 +61,24 @@ class PrivacyPreferences(context: Context) {
     }
 
     fun setPrivacyMode(mode: PrivacyMode) {
-        prefs.edit().putString(KEY_MODE, mode.name).apply()
-        _privacyMode.value = mode
+        val safeMode = resolveSafeMode(mode)
+        prefs.edit().putString(KEY_MODE, safeMode.name).apply()
+        _privacyMode.value = safeMode
     }
 
     fun getPrivacyModeSync(): PrivacyMode {
-        return PrivacyMode.fromName(prefs.getString(KEY_MODE, PrivacyMode.BLUR.name))
+        val stored = PrivacyMode.fromName(prefs.getString(KEY_MODE, PrivacyMode.DARK.name))
+        return resolveSafeMode(stored)
     }
 
     fun setStrength(value: Float) {
-        val clamped = value.coerceIn(0.10f, 0.95f)
+        val clamped = value.coerceIn(0.15f, 0.95f)
         prefs.edit().putFloat(KEY_STRENGTH, clamped).apply()
         _strength.value = clamped
     }
 
     fun getStrengthSync(): Float {
-        return prefs.getFloat(KEY_STRENGTH, 0.65f)
+        return prefs.getFloat(KEY_STRENGTH, 0.60f)
     }
 
     fun setHardwareShortcutEnabled(enabled: Boolean) {

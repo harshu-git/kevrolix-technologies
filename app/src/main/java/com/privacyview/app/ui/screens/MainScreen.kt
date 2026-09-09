@@ -25,7 +25,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ChevronRight
 import androidx.compose.material.icons.outlined.PhoneAndroid
 import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material.icons.outlined.Shield
 import androidx.compose.material.icons.outlined.Tune
 import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.material.icons.outlined.Widgets
@@ -40,6 +39,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -47,7 +47,6 @@ import com.privacyview.app.data.PrivacyMode
 import com.privacyview.app.ui.components.AppleSlider
 import com.privacyview.app.ui.components.ModeSelector
 import com.privacyview.app.ui.components.StatusIndicator
-import com.privacyview.app.ui.theme.ActiveGreen
 import com.privacyview.app.ui.theme.BackgroundDark
 import com.privacyview.app.ui.theme.BorderSubtle
 import com.privacyview.app.ui.theme.SurfaceCard
@@ -67,7 +66,9 @@ fun MainScreen(
     onNavigateToSettings: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
     val scrollState = rememberScrollState()
+    val isBlurSupported = remember { PrivacyMode.isBlurSupported(context) }
 
     val heroButtonBg by animateColorAsState(
         targetValue = if (isPrivacyEnabled) Color(0xFF1E1E22) else Color(0xFFFFFFFF),
@@ -199,15 +200,20 @@ fun MainScreen(
 
             ModeSelector(
                 selectedMode = currentMode,
-                onModeSelected = onModeChanged
+                onModeSelected = onModeChanged,
+                isBlurAvailable = isBlurSupported
             )
 
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = currentMode.description,
+                text = if (currentMode == PrivacyMode.BLUR && !isBlurSupported) {
+                    "Hardware cross-window blur requires Android 12+ with GPU support. Defaulting to universal Dark mode."
+                } else {
+                    currentMode.description
+                },
                 style = Typography.labelSmall,
-                color = TextSecondary,
+                color = if (currentMode == PrivacyMode.BLUR && !isBlurSupported) Color(0xFFFF9F0A) else TextSecondary,
                 modifier = Modifier.padding(start = 8.dp)
             )
 
@@ -294,8 +300,8 @@ fun MainScreen(
             ) {
                 SettingRowClickable(
                     icon = Icons.Outlined.Visibility,
-                    title = "Test Privacy",
-                    subtitle = "Calibrate balance between front & side angles",
+                    title = "Test Privacy / Calibration",
+                    subtitle = "Test viewing angles with realistic sample data",
                     onClick = onNavigateToCalibration
                 )
                 Box(
@@ -307,7 +313,7 @@ fun MainScreen(
                 SettingRowClickable(
                     icon = Icons.Outlined.Tune,
                     title = "Hardware Shortcut",
-                    subtitle = "Double press volume key (Disabled by default)",
+                    subtitle = "Double press volume key (Optional & secondary)",
                     onClick = onNavigateToSettings
                 )
             }

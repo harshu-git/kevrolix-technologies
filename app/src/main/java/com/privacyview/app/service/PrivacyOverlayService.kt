@@ -23,6 +23,7 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
+import java.util.function.Consumer
 import kotlin.math.roundToInt
 
 class PrivacyOverlayService : Service() {
@@ -33,10 +34,14 @@ class PrivacyOverlayService : Service() {
     private var layoutParams: WindowManager.LayoutParams? = null
     private var isOverlayAttached = false
 
+    // Android 12+ dynamic blur availability listener
+    private var blurEnabledListener: Consumer<Boolean>? = null
+
     override fun onCreate() {
         super.onCreate()
         windowManager = getSystemService(Context.WINDOW_SERVICE) as? WindowManager
         startForegroundServiceNotification()
+        setupCrossWindowBlurListener()
         observePreferences()
     }
 
@@ -65,13 +70,32 @@ class PrivacyOverlayService : Service() {
         return START_STICKY
     }
 
+    private fun setupCrossWindowBlurListener() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            val wm = windowManager ?: return
+            blurEnabledListener = Consumer<Boolean> { isBlurEnabled ->
+                // If blur availability changes (e.g. Battery Saver toggled), refresh appearance
+                val prefs = PrivacyApp.instance.preferences
+                updateOverlayAppearance(prefs.getPrivacyModeSync(), prefs.getStrengthSync(), isBlurEnabled)
+            }
+            try {
+                blurEnabledListener?.let { wm.addCrossWindowBlurEnabledListener(it) }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
     private fun observePreferences() {
         val prefs = PrivacyApp.instance.preferences
         serviceScope.launch {
             combine(prefs.privacyMode, prefs.strength) { mode, strength ->
                 Pair(mode, strength)
             }.collect { (mode, strength) ->
-                updateOverlayAppearance(mode, strength)
+                val isBlurEnabled = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    windowManager?.isCrossWindowBlurEnabled == true
+                } else false
+                updateOverlayAppearance(mode, strength, isBlurEnabled)
             }
         }
 
@@ -92,6 +116,7 @@ class PrivacyOverlayService : Service() {
         if (isOverlayAttached) return
 
         if (!Settings.canDrawOverlays(this)) {
+            // Permission lost or not granted: never silently fail, disable state cleanly
             PrivacyApp.instance.preferences.setPrivacyEnabled(false)
             stopSelf()
             return
@@ -108,18 +133,11 @@ class PrivacyOverlayService : Service() {
             WindowManager.LayoutParams.TYPE_PHONE
         }
 
-        var baseFlags = WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE or
+        val baseFlags = WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE or
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
                 WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS or
                 WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS
-
-        // On Android 12+ (API 31+), enable true cross-window blur behind the overlay if supported
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            if (wm.isCrossWindowBlurEnabled) {
-                baseFlags = baseFlags or WindowManager.LayoutParams.FLAG_BLUR_BEHIND
-            }
-        }
 
         val params = WindowManager.LayoutParams(
             WindowManager.LayoutParams.MATCH_PARENT,
@@ -140,9 +158,12 @@ class PrivacyOverlayService : Service() {
         val prefs = PrivacyApp.instance.preferences
         val currentMode = prefs.getPrivacyModeSync()
         val currentStrength = prefs.getStrengthSync()
+        val isBlurEnabled = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            wm.isCrossWindowBlurEnabled
+        } else false
 
-        applyBlurAndTint(params, currentMode, currentStrength)
-        view.updateConfiguration(currentMode, currentStrength)
+        applyBlurAndTint(params, currentMode, currentStrength, isBlurEnabled)
+        view.updateConfiguration(currentMode, currentStrength, isBlurEnabled)
 
         try {
             wm.addView(view, params)
@@ -153,13 +174,13 @@ class PrivacyOverlayService : Service() {
         }
     }
 
-    private fun updateOverlayAppearance(mode: PrivacyMode, strength: Float) {
+    private fun updateOverlayAppearance(mode: PrivacyMode, strength: Float, isCrossWindowBlurAvailable: Boolean) {
         val wm = windowManager ?: return
         val view = overlayView ?: return
         val params = layoutParams ?: return
 
-        applyBlurAndTint(params, mode, strength)
-        view.updateConfiguration(mode, strength)
+        applyBlurAndTint(params, mode, strength, isCrossWindowBlurAvailable)
+        view.updateConfiguration(mode, strength, isCrossWindowBlurAvailable)
 
         if (isOverlayAttached) {
             try {
@@ -170,12 +191,16 @@ class PrivacyOverlayService : Service() {
         }
     }
 
-    private fun applyBlurAndTint(params: WindowManager.LayoutParams, mode: PrivacyMode, strength: Float) {
+    private fun applyBlurAndTint(
+        params: WindowManager.LayoutParams,
+        mode: PrivacyMode,
+        strength: Float,
+        isCrossWindowBlurAvailable: Boolean
+    ) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            val wm = windowManager
-            if (wm != null && wm.isCrossWindowBlurEnabled && mode == PrivacyMode.BLUR) {
+            if (mode == PrivacyMode.BLUR && isCrossWindowBlurAvailable) {
                 params.flags = params.flags or WindowManager.LayoutParams.FLAG_BLUR_BEHIND
-                val blurRadius = (strength * 40f).roundToInt().coerceIn(4, 80)
+                val blurRadius = (strength * 45f).roundToInt().coerceIn(5, 80)
                 params.setBlurRadius(blurRadius)
             } else {
                 params.flags = params.flags and WindowManager.LayoutParams.FLAG_BLUR_BEHIND.inv()
@@ -208,6 +233,7 @@ class PrivacyOverlayService : Service() {
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )
 
+        // Immediate 1-tap Turn Off action for tapjacking safety / quick pause
         val turnOffIntent = Intent(this, PrivacyOverlayService::class.java).apply {
             action = ACTION_STOP_PRIVACY
         }
@@ -237,6 +263,13 @@ class PrivacyOverlayService : Service() {
 
     override fun onDestroy() {
         serviceScope.cancel()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            blurEnabledListener?.let {
+                try {
+                    windowManager?.removeCrossWindowBlurEnabledListener(it)
+                } catch (_: Exception) {}
+            }
+        }
         stopOverlay()
         PrivacyWidgetProvider.updateAllWidgets(this)
         super.onDestroy()

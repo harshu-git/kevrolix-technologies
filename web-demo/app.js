@@ -1,8 +1,8 @@
 // PrivacyView Prototype State Manager & Real Optics Simulation
 const state = {
   isPrivacyEnabled: false,
-  privacyMode: 'BLUR', // 'BLUR' (FLAG_BLUR_BEHIND / Spatial Mesh) | 'DARK' (Luminance Clamping)
-  strength: 0.65,      // 0.15 - 0.95
+  privacyMode: 'DARK', // 'DARK' (Universal Baseline) | 'BLUR' (Enhanced Android 12+)
+  strength: 0.60,      // 0.15 - 0.95
   viewingAngle: 0,     // -75 to +75 deg
   currentScreen: 'privacy-app'
 };
@@ -154,13 +154,13 @@ function updateUI() {
     : 'Tap to obscure screen viewing from side angles.';
 
   // Mode Buttons & Explanations
-  const isBlur = state.privacyMode === 'BLUR';
-  modeBlurBtn.classList.toggle('active', isBlur);
-  modeDarkBtn.classList.toggle('active', !isBlur);
-  modePillIndicator.style.transform = isBlur ? 'translateX(0)' : 'translateX(100%)';
-  modeExplanation.textContent = isBlur
-    ? 'FLAG_BLUR_BEHIND on Android 12+ or spatial micro-lattice camouflage.'
-    : 'Polarized luminance clamping to suppress off-axis panel viewing cones.';
+  const isDark = state.privacyMode === 'DARK';
+  modeDarkBtn.classList.toggle('active', isDark);
+  modeBlurBtn.classList.toggle('active', !isDark);
+  modePillIndicator.style.transform = isDark ? 'translateX(0)' : 'translateX(100%)';
+  modeExplanation.textContent = isDark
+    ? 'Universal baseline: Calibrated luminance clamping exploiting natural panel off-axis contrast falloff.'
+    : 'Enhanced mode: Hardware cross-window blur powered by Android 12+ GPU compositor.';
 
   // Widget
   widgetDot.classList.toggle('active', isEnabled);
