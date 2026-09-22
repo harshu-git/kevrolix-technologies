@@ -2,13 +2,519 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=website/index.html">
-  <title>Kevrolix Technologies</title>
-  <script>
-    window.location.href = "website/index.html";
-  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Primary SEO Metadata -->
+  <title>Kevrolix Technologies — Ideas to Reality</title>
+  <meta name="description" content="Kevrolix Technologies is an independent technology brand focused on building practical digital products, privacy and security solutions, AI-powered tools, and innovative software products.">
+  <meta name="keywords" content="Kevrolix Technologies, Phone Anti Snatcher, privacy software, Android security, technology products, AI tools, independent software">
+  <meta name="author" content="Kevrolix Technologies">
+  <link rel="canonical" href="https://kevrolix.com/">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kevrolix.com/">
+  <meta property="og:title" content="Kevrolix Technologies — Ideas to Reality">
+  <meta property="og:description" content="Independent technology brand building practical digital products, privacy and security solutions, and intelligent software.">
+  <meta property="og:site_name" content="Kevrolix Technologies">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Kevrolix Technologies — Ideas to Reality">
+  <meta name="twitter:description" content="Independent technology brand building practical digital products, privacy and security solutions, and intelligent software.">
+
+  <!-- Favicon (SVG) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300d2ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/><path d='m9 12 2 2 4-4'/></svg>">
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
 </head>
-<body style="background: #07080d; color: #f8fafc; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0;">
-  <p>Navigating to <a href="website/index.html" style="color: #00f0ff;">Kevrolix Technologies Official Website</a>...</p>
+<body>
+  <!-- Ambient Background Canvas & Atmospheric Overlays -->
+  <canvas id="ambient-canvas"></canvas>
+  <div class="bg-grid-overlay"></div>
+  <div class="bg-vignette"></div>
+
+  <!-- Header & Navigation -->
+  <header class="site-header" id="header">
+    <div class="container nav-container">
+      <a href="#hero" class="brand-wrap" aria-label="Kevrolix Technologies Home">
+        <div class="brand-mark">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+        </div>
+        <div class="brand-identity">
+          <span class="brand-name">KEVROLIX</span>
+          <span class="brand-tagline">Ideas to Reality</span>
+        </div>
+      </a>
+
+      <nav class="nav-menu" id="nav-menu">
+        <a href="#what-we-build" class="nav-link">What We Build</a>
+        <a href="#featured-product" class="nav-link">Featured Product</a>
+        <a href="#ecosystem" class="nav-link">Products</a>
+        <a href="#philosophy" class="nav-link">Philosophy</a>
+        <a href="#how-we-build" class="nav-link">How We Build</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="nav-cta-group">
+        <a href="#contact" class="btn btn-secondary btn-sm">Get in Touch</a>
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Open Navigation Menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. HERO SECTION -->
+    <section class="hero-section" id="hero">
+      <div class="container hero-inner">
+        <div class="hero-pill reveal-on-scroll">
+          <span class="hero-pill-dot"></span>
+          <span>KEVROLIX TECHNOLOGIES &bull; PRODUCT COMPANY</span>
+        </div>
+
+        <h1 class="hero-headline reveal-on-scroll">
+          We turn ideas <br>
+          <span class="hero-headline-highlight">into technology.</span>
+        </h1>
+
+        <p class="hero-supporting-text reveal-on-scroll">
+          Kevrolix Technologies builds innovative digital products, intelligent tools and security-focused solutions designed for the real world.
+        </p>
+
+        <div class="hero-btn-row reveal-on-scroll">
+          <a href="#featured-product" class="btn btn-primary btn-lg">Explore Our Products</a>
+          <a href="#what-we-build" class="btn btn-secondary btn-lg">What We Build</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. WHAT WE BUILD -->
+    <section class="section" id="what-we-build">
+      <div class="container">
+        <div class="section-head reveal-on-scroll">
+          <span class="section-eyebrow">Product Disciplines</span>
+          <h2 class="section-title">Built for what's next.</h2>
+          <p class="section-subtitle">
+            Focused on purpose-driven software engineering that addresses practical needs in modern digital life.
+          </p>
+        </div>
+
+        <div class="feature-blocks-grid">
+          <!-- Block 1: Security -->
+          <div class="feature-block-card reveal-on-scroll">
+            <div class="feature-icon-wrapper">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <div class="feature-block-label">Pillar 01</div>
+            <h3 class="feature-block-title">SECURITY</h3>
+            <p class="feature-block-description">
+              Privacy and security-focused products designed to help protect people and their digital lives.
+            </p>
+          </div>
+
+          <!-- Block 2: Intelligence -->
+          <div class="feature-block-card reveal-on-scroll">
+            <div class="feature-icon-wrapper">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+              </svg>
+            </div>
+            <div class="feature-block-label">Pillar 02</div>
+            <h3 class="feature-block-title">INTELLIGENCE</h3>
+            <p class="feature-block-description">
+              AI-powered tools that transform complex information into useful digital experiences.
+            </p>
+          </div>
+
+          <!-- Block 3: Innovation -->
+          <div class="feature-block-card reveal-on-scroll">
+            <div class="feature-icon-wrapper">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+              </svg>
+            </div>
+            <div class="feature-block-label">Pillar 03</div>
+            <h3 class="feature-block-title">INNOVATION</h3>
+            <p class="feature-block-description">
+              Turning ambitious ideas into practical technology products for the real world.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. FEATURED PRODUCT: Phone Anti Snatcher -->
+    <section class="section" id="featured-product">
+      <div class="container">
+        <div class="featured-product-card reveal-on-scroll">
+          <div class="featured-product-grid">
+            <!-- Product Information -->
+            <div>
+              <div class="product-status-tag">
+                <span class="status-dot"></span>
+                <span>STATUS: LAUNCHING</span>
+              </div>
+              <div class="product-display-name">Flagship Android Application</div>
+              <h2 class="product-headline">Your phone. Your privacy. Your control.</h2>
+              <p class="product-description">
+                Phone Anti Snatcher is a privacy-focused Android application designed to help protect your screen and sensitive information from unwanted viewing and unexpected situations.
+              </p>
+
+              <div class="product-pillars-list">
+                <div class="product-pillar-item">
+                  <svg class="pillar-check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span><strong>Instant Privacy Blackout Curtain:</strong> Conceals active display with one tap or volume key shortcut.</span>
+                </div>
+                <div class="product-pillar-item">
+                  <svg class="pillar-check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span><strong>Anti-Snatch Motion Sentinel:</strong> On-device accelerometer triggers instant lock on sudden grab movements.</span>
+                </div>
+                <div class="product-pillar-item">
+                  <svg class="pillar-check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span><strong>Anti-Tamper Shield:</strong> Intercepts unauthorized notification shade and settings tampering.</span>
+                </div>
+                <div class="product-pillar-item">
+                  <svg class="pillar-check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span><strong>100% On-Device & Offline:</strong> Zero data collection, no telemetry, no tracking libraries.</span>
+                </div>
+              </div>
+
+              <div>
+                <a href="phone-anti-snatcher.html" class="btn btn-primary btn-lg">
+                  Explore Phone Anti Snatcher
+                </a>
+              </div>
+            </div>
+
+            <!-- Premium Android Device Mockup -->
+            <div class="phone-mockup-wrap">
+              <div class="android-phone-chassis">
+                <div class="phone-screen">
+                  <div class="phone-punchhole"></div>
+                  <div class="phone-status-bar">
+                    <span>KEVROLIX SENTINEL</span>
+                    <span id="phone-clock">09:41</span>
+                  </div>
+
+                  <div class="phone-app-header">
+                    <div class="phone-app-icon">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <div>
+                      <div class="phone-app-name">Phone Anti Snatcher</div>
+                      <div style="font-size: 0.68rem; color: var(--text-muted);">Android Security Suite</div>
+                    </div>
+                  </div>
+
+                  <div class="phone-shield-card">
+                    <div class="shield-state-graphic">
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <div class="shield-status-label">Sentinel Active</div>
+                    <div class="shield-mode-desc">Physical & Screen Defenses Armed</div>
+                  </div>
+
+                  <div class="phone-toggle-row">
+                    <span class="toggle-title">Instant Privacy Curtain</span>
+                    <span class="toggle-indicator">STANDBY</span>
+                  </div>
+
+                  <div class="phone-toggle-row">
+                    <span class="toggle-title">Anti-Snatch Motion</span>
+                    <span class="toggle-indicator" style="color: #00e676;">ARMED</span>
+                  </div>
+
+                  <div class="phone-toggle-row">
+                    <span class="toggle-title">Anti-Tamper Shield</span>
+                    <span class="toggle-indicator" style="color: #00e676;">ACTIVE</span>
+                  </div>
+
+                  <div style="font-size: 0.68rem; color: var(--text-muted); text-align: center; margin-top: auto; font-family: var(--font-mono);">
+                    Double-Press Vol-Down = Blackout
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. KEVROLIX PRODUCT ECOSYSTEM -->
+    <section class="section" id="ecosystem">
+      <div class="container">
+        <div class="section-head reveal-on-scroll">
+          <span class="section-eyebrow">Product Ecosystem</span>
+          <h2 class="section-title">From ideas to products.</h2>
+          <p class="section-subtitle">
+            An expanding portfolio of independent digital solutions engineered for privacy, intelligence, and utility.
+          </p>
+        </div>
+
+        <div class="ecosystem-grid">
+          <!-- Active Product -->
+          <div class="ecosystem-item ecosystem-item-active reveal-on-scroll">
+            <div>
+              <div class="ecosystem-header">
+                <span class="ecosystem-category">Mobile Security</span>
+                <span class="badge-status badge-launching">Launching</span>
+              </div>
+              <h3 class="ecosystem-title">Phone Anti Snatcher</h3>
+              <p class="ecosystem-desc">
+                Physical security sentinel and on-demand privacy curtain for Android. Shields personal screen data and defends against sudden street grabs.
+              </p>
+            </div>
+            <div class="ecosystem-meta">
+              <span>Platform: Android</span>
+              <span>Status: Launching</span>
+            </div>
+            <div style="margin-top: 14px;">
+              <a href="phone-anti-snatcher.html" class="btn btn-secondary btn-sm" style="width: 100%;">View Product Details &rarr;</a>
+            </div>
+          </div>
+
+          <!-- Coming Soon Concept 1 -->
+          <div class="ecosystem-item reveal-on-scroll">
+            <div>
+              <div class="ecosystem-header">
+                <span class="ecosystem-category">Privacy Architecture</span>
+                <span class="badge-status badge-coming-soon">Coming Soon</span>
+              </div>
+              <h3 class="ecosystem-title">Sentinel Core</h3>
+              <p class="ecosystem-desc">
+                On-device privacy and sensor analytics framework designed to give applications hardware-level awareness without cloud reliance.
+              </p>
+            </div>
+            <div class="ecosystem-meta">
+              <span>Platform: Embedded / Mobile</span>
+              <span>Status: Coming Soon</span>
+            </div>
+          </div>
+
+          <!-- Coming Soon Concept 2 -->
+          <div class="ecosystem-item reveal-on-scroll">
+            <div>
+              <div class="ecosystem-header">
+                <span class="ecosystem-category">Applied Intelligence</span>
+                <span class="badge-status badge-coming-soon">Coming Soon</span>
+              </div>
+              <h3 class="ecosystem-title">Kevrolix Cognitive Tools</h3>
+              <p class="ecosystem-desc">
+                Intelligent software utilities leveraging local machine learning models to synthesize data while maintaining strict privacy boundaries.
+              </p>
+            </div>
+            <div class="ecosystem-meta">
+              <span>Platform: Multi-Platform</span>
+              <span>Status: Coming Soon</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. PHILOSOPHY SECTION -->
+    <section class="philosophy-section" id="philosophy">
+      <div class="container philosophy-container">
+        <span class="philosophy-tag reveal-on-scroll">Our Core Principle</span>
+        <blockquote class="philosophy-statement reveal-on-scroll">
+          "Ideas are everywhere. <br>
+          Execution is everything."
+        </blockquote>
+        <p class="philosophy-subtext reveal-on-scroll">
+          We believe great technology begins with a meaningful idea and becomes valuable through thoughtful design, engineering and continuous improvement.
+        </p>
+      </div>
+    </section>
+
+    <!-- 6. HOW WE BUILD -->
+    <section class="section" id="how-we-build">
+      <div class="container">
+        <div class="section-head reveal-on-scroll">
+          <span class="section-eyebrow">Methodology</span>
+          <h2 class="section-title">From concept to reality.</h2>
+          <p class="section-subtitle">
+            A disciplined product development process that translates problems into dependable technology.
+          </p>
+        </div>
+
+        <div class="timeline-grid">
+          <!-- Step 1 -->
+          <div class="timeline-step-card reveal-on-scroll">
+            <div class="step-num">01 — DISCOVER</div>
+            <h3 class="step-title">Identify the Need</h3>
+            <p class="step-desc">
+              Understand the problem and identify the opportunity.
+            </p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="timeline-step-card reveal-on-scroll">
+            <div class="step-num">02 — DESIGN</div>
+            <h3 class="step-title">Intuitive Flow</h3>
+            <p class="step-desc">
+              Create a clear, intuitive and purposeful experience.
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="timeline-step-card reveal-on-scroll">
+            <div class="step-num">03 — BUILD</div>
+            <h3 class="step-title">Rigorous Engineering</h3>
+            <p class="step-desc">
+              Turn the concept into reliable, scalable technology.
+            </p>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="timeline-step-card reveal-on-scroll">
+            <div class="step-num">04 — EVOLVE</div>
+            <h3 class="step-title">Feedback & Iteration</h3>
+            <p class="step-desc">
+              Continuously improve the product through real-world feedback.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. ABOUT KEVROLIX -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="about-section-card reveal-on-scroll">
+          <div class="section-eyebrow" style="margin-bottom: 20px;">About Kevrolix Technologies</div>
+          <h2 class="section-title" style="margin-bottom: 24px;">Technology for a better tomorrow.</h2>
+          <div class="about-text-content">
+            <p class="about-body-p">
+              Kevrolix Technologies is an independent technology brand focused on creating useful digital products across privacy, security, artificial intelligence and emerging technology.
+            </p>
+            <p class="about-body-p" style="color: var(--text-muted); font-size: 1.05rem;">
+              We approach engineering with a focus on real-world utility, respectful user privacy, and dependable software execution. Each product in our pipeline is built from the ground up to solve concrete problems without unnecessary complexity or data overreach.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. VISION SECTION -->
+    <section class="section" id="vision">
+      <div class="container">
+        <div class="vision-box reveal-on-scroll">
+          <span class="section-eyebrow" style="margin-bottom: 24px;">Long-Term Outlook</span>
+          <h2 class="vision-headline">Building technology that matters.</h2>
+          <p class="vision-supporting-text">
+            From privacy and security to intelligent digital experiences, we explore ideas that can make technology more useful, secure and human.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. CONTACT / CTA -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="contact-section-inner">
+          <div class="contact-hero-text reveal-on-scroll">
+            <span class="section-eyebrow">Connect</span>
+            <h2 class="contact-headline">Have an idea worth building?</h2>
+            <p class="contact-subtext">Let's turn it into something real.</p>
+          </div>
+
+          <div class="contact-form-container reveal-on-scroll">
+            <form id="contact-form" novalidate>
+              <div class="form-grid-row">
+                <div class="form-group-field">
+                  <label class="form-field-label" for="contact-name">Name *</label>
+                  <input type="text" id="contact-name" class="form-field-input" placeholder="Your name" required>
+                </div>
+                <div class="form-group-field">
+                  <label class="form-field-label" for="contact-email">Email *</label>
+                  <input type="email" id="contact-email" class="form-field-input" placeholder="name@domain.com" required>
+                </div>
+              </div>
+
+              <div class="form-group-field">
+                <label class="form-field-label" for="contact-subject">Subject *</label>
+                <input type="text" id="contact-subject" class="form-field-input" placeholder="Subject or topic of inquiry" required>
+              </div>
+
+              <div class="form-group-field">
+                <label class="form-field-label" for="contact-message">Message *</label>
+                <textarea id="contact-message" class="form-field-textarea" placeholder="Share your message or inquiry..." required></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+                Start a Conversation
+              </button>
+
+              <div class="form-status-alert form-status-success" id="form-success">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+                <span>Thank you for reaching out. Your message has been received. You can also write directly to <strong>kevrolix@gmail.com</strong>.</span>
+              </div>
+
+              <div class="form-status-alert form-status-error" id="form-error">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                <span id="form-error-text">Please ensure all required fields are filled out with a valid email.</span>
+              </div>
+            </form>
+
+            <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: var(--text-muted); flex-wrap: wrap; gap: 10px;">
+              <span>Direct Inquiries: <a href="mailto:kevrolix@gmail.com" style="color: var(--cyan-primary);">kevrolix@gmail.com</a></span>
+              <span>Response window: Within 24-48 business hours</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 10. FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top-row">
+        <div>
+          <div class="footer-brand-title">KEVROLIX TECHNOLOGIES</div>
+          <div class="footer-brand-motto">IDEAS TO REALITY</div>
+          <p style="color: var(--text-muted); font-size: 0.875rem; margin-top: 10px; max-width: 340px;">
+            An independent technology brand creating useful digital products across privacy, security, and intelligent systems.
+          </p>
+        </div>
+
+        <nav class="footer-nav-list" aria-label="Footer Navigation">
+          <div class="footer-nav-item"><a href="#ecosystem">Products</a></div>
+          <div class="footer-nav-item"><a href="#about">About</a></div>
+          <div class="footer-nav-item"><a href="#contact">Contact</a></div>
+          <div class="footer-nav-item"><a href="privacy_policy.html">Privacy Policy</a></div>
+          <div class="footer-nav-item"><a href="terms.html">Terms of Service</a></div>
+          <div class="footer-nav-item"><a href="#contact">Support</a></div>
+        </nav>
+      </div>
+
+      <div class="footer-bottom-row">
+        <div>&copy; 2026 Kevrolix Technologies. All rights reserved.</div>
+        <div style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted);">
+          INDEPENDENT TECHNOLOGY BRAND
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
 </body>
 </html>

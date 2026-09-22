@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Page Not Found | Kevrolix Technologies</title>
+  <meta name="description" content="Page not found on Kevrolix Technologies.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300d2ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/><path d='m9 12 2 2 4-4'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .error-container {
+      min-height: calc(100vh - 180px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .error-code {
+      font-family: var(--font-mono);
+      font-size: clamp(5rem, 12vw, 9rem);
+      font-weight: 800;
+      line-height: 1;
+      color: rgba(0, 210, 255, 0.15);
+      letter-spacing: -0.05em;
+      margin-bottom: 8px;
+    }
+    .error-headline {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 800;
+      color: var(--metallic-white);
+      margin-bottom: 16px;
+    }
+    .error-description {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 520px;
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid-overlay"></div>
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-wrap">
+        <div class="brand-mark">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+        </div>
+        <div class="brand-identity">
+          <span class="brand-name">KEVROLIX</span>
+          <span class="brand-tagline">Ideas to Reality</span>
+        </div>
+      </a>
+      <a href="index.html" class="btn btn-primary btn-sm">Home Page</a>
+    </div>
+  </header>
+
+  <main class="container error-container">
+    <div class="error-code">404</div>
+    <h1 class="error-headline">Resource Not Located</h1>
+    <p class="error-description">
+      The requested endpoint or document does not exist or may have been relocated within the Kevrolix Technologies architecture.
+    </p>
+    <a href="index.html" class="btn btn-primary btn-lg">Return to Kevrolix Home</a>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container" style="text-align: center; color: var(--text-muted); font-size: 0.85rem;">
+      &copy; 2026 Kevrolix Technologies. All rights reserved. &bull; Ideas to Reality
+    </div>
+  </footer>
+</body>
+</html>
