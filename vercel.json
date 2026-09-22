@@ -2,6 +2,10 @@
   "cleanUrls": true,
   "rewrites": [
     { "source": "/", "destination": "/website/index.html" },
+    { "source": "/phone-anti-snatcher", "destination": "/website/phone-anti-snatcher.html" },
+    { "source": "/phone-anti-snatcher.html", "destination": "/website/phone-anti-snatcher.html" },
+    { "source": "/web-demo", "destination": "/website/phone-anti-snatcher.html" },
+    { "source": "/web-demo/(.*)", "destination": "/website/phone-anti-snatcher.html" },
     { "source": "/privacy_policy", "destination": "/privacy_policy.html" },
     { "source": "/privacy_policy.html", "destination": "/privacy_policy.html" },
     { "source": "/terms", "destination": "/website/terms.html" },
