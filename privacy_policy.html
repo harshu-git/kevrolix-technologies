@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Anti Phone Snatcher</title>
+    <style>
+        :root {
+            --bg-color: #0d0d11;
+            --card-bg: #16161d;
+            --text-primary: #f0f0f5;
+            --text-secondary: #9d9da8;
+            --accent-green: #30D158;
+            --accent-amber: #FFB300;
+            --border-color: #262633;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.65;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 820px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+        .header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 24px;
+            margin-bottom: 32px;
+        }
+        .badge {
+            display: inline-block;
+            background: rgba(48, 209, 88, 0.15);
+            color: var(--accent-green);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            border: 1px solid rgba(48, 209, 88, 0.3);
+        }
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+        .last-updated {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        h2 {
+            font-size: 20px;
+            color: var(--text-primary);
+            margin: 32px 0 14px 0;
+            font-weight: 600;
+            border-left: 3px solid var(--accent-green);
+            padding-left: 12px;
+        }
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            font-size: 15px;
+        }
+        ul {
+            margin-left: 20px;
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        .highlight-card {
+            background: #111e15;
+            border: 1px solid rgba(48, 209, 88, 0.3);
+            border-radius: 14px;
+            padding: 20px;
+            margin: 24px 0;
+        }
+        .highlight-card h3 {
+            color: var(--accent-green);
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        .highlight-card p {
+            color: #d1d1db;
+            margin-bottom: 0;
+            font-size: 14px;
+        }
+        .footer {
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        a {
+            color: var(--accent-green);
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <span class="badge">100% On-Device &bull; Zero Data Collection</span>
+            <h1>Privacy Policy for Anti Phone Snatcher</h1>
+            <div class="last-updated">Last updated: September 2026</div>
+        </div>
+
+        <div class="highlight-card">
+            <h3>Core Privacy Commitment</h3>
+            <p><strong>Anti Phone Snatcher does not collect, transmit, store, sell, or analyze any user data.</strong> The application operates entirely offline on your physical device. No account is required, no external servers are contacted, and no telemetry or tracking libraries are bundled.</p>
+        </div>
+
+        <h2>1. Information We Collect</h2>
+        <p><strong>None.</strong> We believe personal privacy should be absolute. Anti Phone Snatcher does not collect any personally identifiable information (PII), device identifiers, location data, usage statistics, or crash reports.</p>
+
+        <h2>2. Android System Permissions & Justification</h2>
+        <p>To deliver its core privacy shielding and anti-snatching defenses, Anti Phone Snatcher utilizes specific Android operating system permissions. All processing remains strictly local to your device:</p>
+        <ul>
+            <li><strong>Display Over Other Apps (SYSTEM_ALERT_WINDOW):</strong> Required exclusively to render the privacy curtain (blackout screen, directional louvers, or blurred shield) over your active screen when triggered by you or security sensors.</li>
+            <li><strong>Accessibility Service (BIND_ACCESSIBILITY_SERVICE):</strong> Used solely to enable two on-device physical security protections:
+                <ul>
+                    <li><em>Physical Volume Trigger:</em> Enables double-pressing the Volume Down button to instantly black out or disarm the privacy curtain.</li>
+                    <li><em>Anti-Theft Tamper Shield:</em> Detects attempts to pull down the notification quick-settings shade or open system settings while privacy blackout is armed, locking down the phone.</li>
+                </ul>
+                <em>Note: Anti Phone Snatcher NEVER accesses, reads, logs, or transmits keystrokes, messages, screen text, passwords, or communications.</em>
+            </li>
+            <li><strong>Motion & Accelerometer Sensors:</strong> Used strictly in real-time to compute sudden acceleration vectors when the Anti-Snatch Sentinel feature is activated. Sensor data is analyzed continuously in local memory and discarded instantaneously; it is never saved or recorded.</li>
+            <li><strong>Foreground Service (FOREGROUND_SERVICE):</strong> Ensures the privacy overlay remains persistent and unkillable by system memory cleaners during active privacy shielding.</li>
+        </ul>
+
+        <h2>3. Third-Party Services & Analytics</h2>
+        <p>Anti Phone Snatcher does not include any third-party software development kits (SDKs), advertising networks, or analytics frameworks (e.g., Google Analytics, Firebase, Facebook SDK, or crash reporting services). Your device makes no outbound network connections for analytics.</p>
+
+        <h2>4. Data Storage & Security</h2>
+        <p>User preferences (such as chosen recovery PIN, tap unlock sequence, and visual curtain theme) are stored exclusively on your device using Android's encrypted DataStore preferences. They never leave your device.</p>
+
+        <h2>5. Children's Privacy</h2>
+        <p>Because Anti Phone Snatcher collects no personal data whatsoever, it is fully compliant with COPPA and global child privacy regulations. It does not solicit information from anyone under the age of 13.</p>
+
+        <h2>6. Changes to This Privacy Policy</h2>
+        <p>We may update this Privacy Policy from time to time to reflect operational or legal updates. Any changes will be posted on this page with an updated revision date.</p>
+
+        <h2>7. Contact & Support</h2>
+        <p>If you have any questions, feedback, or security inquiries regarding this Privacy Policy or Anti Phone Snatcher, please contact us at:</p>
+        <p><strong>Email:</strong> <a href="mailto:kevrolix@gmail.com">kevrolix@gmail.com</a></p>
+
+        <div class="footer">
+            &copy; 2026 Anti Phone Snatcher. All rights reserved. Built with privacy-first architecture.
+        </div>
+    </div>
+</body>
+</html>

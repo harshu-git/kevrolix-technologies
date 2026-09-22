@@ -157,11 +157,12 @@ def build_gradle(jdk_path):
     env["ANDROID_HOME"] = SDK_DIR
     env["PATH"] = f"{os.path.join(jdk_path, 'bin')};{env.get('PATH', '')}"
 
+    tasks = sys.argv[1:] if len(sys.argv) > 1 else ["bundleRelease", "assembleRelease"]
     print("\n" + "="*60)
-    print("STARTING GRADLE BUILD: assembleDebug")
+    print(f"STARTING GRADLE BUILD: {' '.join(tasks)}")
     print("="*60 + "\n")
 
-    cmd = [gradlew, "assembleDebug", "--stacktrace"]
+    cmd = [gradlew] + tasks + ["--stacktrace"]
     proc = subprocess.Popen(cmd, cwd=ROOT_DIR, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
     
     for line in proc.stdout:
@@ -177,17 +178,32 @@ def build_gradle(jdk_path):
     print("BUILD SUCCESSFUL!")
     print("="*60)
 
-    # Locate APK
-    apk_source = os.path.join(ROOT_DIR, "app", "build", "outputs", "apk", "debug", "app-debug.apk")
     out_dir = os.path.join(ROOT_DIR, "build-output")
     os.makedirs(out_dir, exist_ok=True)
-    dest_apk = os.path.join(out_dir, "PrivacyView-debug.apk")
-    if os.path.exists(apk_source):
-        shutil.copyfile(apk_source, dest_apk)
-        size_mb = os.path.getsize(dest_apk) / (1024 * 1024)
-        print(f"\nGenerated APK ready at:\n  {dest_apk} ({size_mb:.2f} MB)")
-    else:
-        print(f"\n[Warning] Could not locate output APK at {apk_source}")
+
+    # 1. Locate Release AAB
+    aab_source = os.path.join(ROOT_DIR, "app", "build", "outputs", "bundle", "release", "app-release.aab")
+    dest_aab = os.path.join(out_dir, "AntiPhoneSnatcher-release.aab")
+    if os.path.exists(aab_source):
+        shutil.copyfile(aab_source, dest_aab)
+        size_mb = os.path.getsize(dest_aab) / (1024 * 1024)
+        print(f"\n[Google Play App Bundle] Ready for Store Upload:\n  {dest_aab} ({size_mb:.2f} MB)")
+
+    # 2. Locate Release APK
+    apk_release = os.path.join(ROOT_DIR, "app", "build", "outputs", "apk", "release", "app-release.apk")
+    dest_apk_release = os.path.join(out_dir, "AntiPhoneSnatcher-release.apk")
+    if os.path.exists(apk_release):
+        shutil.copyfile(apk_release, dest_apk_release)
+        size_mb = os.path.getsize(dest_apk_release) / (1024 * 1024)
+        print(f"\n[Release APK] Signed Production APK:\n  {dest_apk_release} ({size_mb:.2f} MB)")
+
+    # 3. Locate Debug APK if built
+    apk_debug = os.path.join(ROOT_DIR, "app", "build", "outputs", "apk", "debug", "app-debug.apk")
+    dest_apk_debug = os.path.join(out_dir, "AntiPhoneSnatcher-debug.apk")
+    if os.path.exists(apk_debug):
+        shutil.copyfile(apk_debug, dest_apk_debug)
+        size_mb = os.path.getsize(dest_apk_debug) / (1024 * 1024)
+        print(f"\n[Debug APK]:\n  {dest_apk_debug} ({size_mb:.2f} MB)")
 
 def main():
     jdk_path = setup_jdk()

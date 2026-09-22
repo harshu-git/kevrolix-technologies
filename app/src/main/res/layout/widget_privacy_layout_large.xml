@@ -6,68 +6,72 @@
     android:background="@drawable/widget_card_bg"
     android:clickable="true"
     android:focusable="true"
-    android:paddingHorizontal="16dp"
-    android:paddingVertical="10dp">
+    android:padding="18dp">
 
+    <!-- Top Row: App Icon & Sentry Status Badge -->
     <ImageView
         android:id="@+id/widget_logo"
-        android:layout_width="38dp"
-        android:layout_height="38dp"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
         android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
+        android:layout_alignParentTop="true"
         android:contentDescription="@string/app_name"
         android:src="@drawable/ic_widget_logo" />
 
     <TextView
-        android:id="@+id/widget_action_button"
+        android:id="@+id/widget_mode_badge"
         android:layout_width="wrap_content"
-        android:layout_height="34dp"
+        android:layout_height="24dp"
         android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
+        android:layout_alignParentTop="true"
         android:background="@drawable/widget_btn_off"
-        android:clickable="true"
-        android:focusable="true"
         android:gravity="center"
-        android:minWidth="60dp"
-        android:paddingHorizontal="16dp"
-        android:text="ON"
-        android:textColor="#FFFFFF"
-        android:textSize="12sp"
+        android:paddingHorizontal="10dp"
+        android:text="Reading Mask"
+        android:textColor="#8E8E93"
+        android:textSize="10sp"
         android:textStyle="bold" />
 
+    <!-- Center / Bottom Content: Title, Subtitle, and Full-Width Action Button -->
     <LinearLayout
-        android:id="@+id/widget_info_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_toEndOf="@id/widget_logo"
-        android:layout_toStartOf="@id/widget_action_button"
-        android:layout_marginStart="14dp"
-        android:layout_marginEnd="10dp"
+        android:layout_above="@id/widget_action_button"
+        android:layout_marginBottom="14dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/widget_app_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
             android:fontFamily="sans-serif-medium"
-            android:maxLines="1"
             android:text="@string/app_name"
             android:textColor="#FFFFFF"
-            android:textSize="15sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/widget_status_subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:ellipsize="end"
             android:fontFamily="sans-serif"
-            android:maxLines="1"
-            android:text="Tap to activate"
+            android:text="Protection Inactive"
             android:textColor="#8E8E93"
-            android:textSize="11sp" />
+            android:textSize="12sp" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/widget_action_button"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/widget_btn_off"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:text="Turn On Privacy"
+        android:textColor="#FFFFFF"
+        android:textSize="13sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>

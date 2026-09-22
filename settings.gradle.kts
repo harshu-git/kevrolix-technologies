@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "PrivacyView"
+rootProject.name = "Anti Phone Snatcher"
 include(":app")

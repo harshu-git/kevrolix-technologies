@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.privacyview.app"
+    namespace = "com.antiphonesnatcher.app"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.privacyview.app"
+        applicationId = "com.antiphonesnatcher.app"
         minSdk = 26
         targetSdk = 35
         versionCode = 1
@@ -21,6 +21,15 @@ android {
         }
     }
 
+    signingConfigs {
+        create("release") {
+            storeFile = file("antiphonesnatcher-release.jks")
+            storePassword = "antiphonesnatcher2026!"
+            keyAlias = "antiphonesnatcher"
+            keyPassword = "antiphonesnatcher2026!"
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = true
@@ -29,7 +38,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.getByName("release")
         }
         debug {
             applicationIdSuffix = ".debug"
@@ -48,6 +57,7 @@ android {
 
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 
     packaging {

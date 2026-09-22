@@ -1,0 +1,12 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/", "destination": "/website/index.html" },
+    { "source": "/privacy_policy", "destination": "/privacy_policy.html" },
+    { "source": "/privacy_policy.html", "destination": "/privacy_policy.html" },
+    { "source": "/terms", "destination": "/website/terms.html" },
+    { "source": "/terms.html", "destination": "/website/terms.html" },
+    { "source": "/404", "destination": "/website/404.html" },
+    { "source": "/(.*)", "destination": "/website/$1" }
+  ]
+}

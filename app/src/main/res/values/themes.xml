@@ -1,5 +1,5 @@
 <resources>
-    <style name="Theme.PrivacyView" parent="android:Theme.Material.NoActionBar">
+    <style name="Theme.AntiPhoneSnatcher" parent="android:Theme.Material.NoActionBar">
         <item name="android:statusBarColor">@color/background_black</item>
         <item name="android:navigationBarColor">@color/background_black</item>
         <item name="android:windowBackground">@color/background_black</item>

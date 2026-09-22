@@ -1,10 +1,14 @@
 <resources>
-    <string name="app_name">PrivacyView</string>
-    <string name="app_tagline">Your screen. Your privacy.</string>
-    <string name="privacy_on">Privacy is ON</string>
-    <string name="privacy_off">Privacy is OFF</string>
-    <string name="turn_on_privacy">Turn On Privacy</string>
-    <string name="turn_off_privacy">Turn Off Privacy</string>
+    <string name="app_name">Anti Phone Snatcher</string>
+    <string name="launcher_app_name">Anti Phone Snatcher</string>
+    <string name="widget_compact_name">Anti Phone Snatcher: Quick 1x1</string>
+    <string name="widget_regular_name">Anti Phone Snatcher: Quick Bar</string>
+    <string name="widget_large_name">Anti Phone Snatcher: Dashboard 4x2</string>
+    <string name="app_tagline">Instant panic shield &amp; theft defense.</string>
+    <string name="privacy_on">Shield is ON</string>
+    <string name="privacy_off">Shield is OFF</string>
+    <string name="turn_on_privacy">Turn On Shield</string>
+    <string name="turn_off_privacy">Turn Off Shield</string>
     <string name="privacy_effect">Privacy Effect</string>
     <string name="privacy_strength">Privacy Strength</string>
     <string name="effect_blur">Blur</string>
@@ -15,11 +19,11 @@
     <string name="advanced">Advanced</string>
     <string name="hardware_shortcut">Hardware Shortcut</string>
     <string name="test_privacy">Test Privacy</string>
-    <string name="accessibility_service_description">PrivacyView uses this service solely to detect double-clicks of the volume button to toggle privacy mode. No keystrokes, screen content, or personal data are collected or transmitted.</string>
-    <string name="tile_label">PrivacyView</string>
-    <string name="notification_channel_name">PrivacyView Active</string>
-    <string name="notification_channel_desc">Shows an unobtrusive status notification when privacy overlay is active.</string>
-    <string name="notification_title">PrivacyView Active</string>
-    <string name="notification_text">Tap to configure or turn off privacy mode.</string>
+    <string name="accessibility_service_description">Anti Phone Snatcher uses this service solely to detect hardware shortcuts to engage emergency protection. No personal data or screen content is collected or transmitted.</string>
+    <string name="tile_label">Anti Phone Snatcher</string>
+    <string name="notification_channel_name">Anti Phone Snatcher</string>
+    <string name="notification_channel_desc">Shows an unobtrusive status notification when protection is armed.</string>
+    <string name="notification_title">Anti Phone Snatcher Active</string>
+    <string name="notification_text">Tap to configure or disarm protection.</string>
     <string name="developer_name">Kevrolix Technologies</string>
 </resources>
